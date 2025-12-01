@@ -58,8 +58,12 @@ python -m venv venv
 # Windows: .\venv\Scripts\activate
 # Linux/macOS: source venv/bin/activate
 
+---
+
 2. Install Dependencies
 pip install tensorflow python-chess numpy pandas matplotlib
+
+---
 
 3. Execution
 Run data_extraction.ipynb or data_extraction.py to process the raw PGN data.
