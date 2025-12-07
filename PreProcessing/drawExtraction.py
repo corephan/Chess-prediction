@@ -78,7 +78,7 @@ def extract_all_draws(source_folder, source_files, output_filename):
 # --- CẤU HÌNH & CHẠY ---
 if __name__ == "__main__":
     # Đường dẫn tới thư mục DataSets/pgnData
-    BASE_DIR = os.path.join(os.path.dirname(__file__), "..", "DataSets", "pgnData")
+    BASE_DIR = "/content/ChessOutcomesPrediction/DataSets/pgnData"
     
     # Kiểm tra nếu thư mục không tồn tại
     if not os.path.exists(BASE_DIR):
