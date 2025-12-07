@@ -9,7 +9,7 @@ import time
 # 🎛️ CẤU HÌNH HỆ THỐNG
 # =================================================================
 # Lấy đường dẫn thư mục gốc của project (lùi lên 1 cấp từ PreProcessing)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = "/content/ChessOutcomesPrediction"
 
 # Đường dẫn file đã được sửa lỗi cú pháp:
 # Sử dụng os.path.join để kết hợp các thành phần đường dẫn.
