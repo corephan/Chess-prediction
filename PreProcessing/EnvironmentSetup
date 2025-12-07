@@ -1,0 +1,54 @@
+# ===============================
+# Chess Outcomes Prediction Setup
+# ===============================
+
+# 1️⃣ Cài thư viện cần thiết
+!pip install --quiet tensorflow python-chess numpy pandas matplotlib tqdm
+
+# 2️⃣ Tạo cấu trúc thư mục
+import os
+
+project_path = "/content/ChessOutcomesPrediction"
+folders = [
+    "Presentation",
+    "Report",
+    "Demo",
+    "System/models",
+    "System/dataset",
+    "DataSets/pgnData"   # folder chứa file PGN
+]
+
+for folder in folders:
+    os.makedirs(os.path.join(project_path, folder), exist_ok=True)
+
+print("✅ Folder structure created successfully!")
+
+# 3️⃣ Tạo file python trống
+files = [
+    "System/data_extraction.py",
+    "System/train_model.py",
+    "System/utils.py",
+    "System/process_merge.py"  # file mới chứa process_and_merge()
+]
+
+for file in files:
+    path = os.path.join(project_path, file)
+    if not os.path.exists(path):
+        with open(path, "w") as f:
+            f.write(f"# File {file} - Start coding here\n")
+print("✅ Python files created!")
+
+# 4️⃣ Kiểm tra môi trường
+import tensorflow as tf
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import chess
+import tqdm
+
+print("TensorFlow version:", tf.__version__)
+print("Numpy version:", np.__version__)
+print("Pandas version:", pd.__version__)
+print("Matplotlib version:", plt.matplotlib.__version__)
+print("python-chess imported successfully")
+print("tqdm imported successfully")
