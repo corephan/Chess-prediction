@@ -21,7 +21,7 @@ folders = [
 for folder in folders:
     os.makedirs(os.path.join(project_path, folder), exist_ok=True)
 
-print("✅ Folder structure created successfully!")
+print("Folder structure created successfully!")
 
 # 3️⃣ Tạo file python trống
 files = [
@@ -36,7 +36,7 @@ for file in files:
     if not os.path.exists(path):
         with open(path, "w") as f:
             f.write(f"# File {file} - Start coding here\n")
-print("✅ Python files created!")
+print("Python files created!")
 
 # 4️⃣ Kiểm tra môi trường
 import tensorflow as tf
