@@ -1,0 +1,35 @@
+import chess.pgn
+import os
+
+# 1. Define the full path to the validation.pgn file
+validation_pgn_path = os.path.join(OUTPUT_DIR, 'validation.pgn')
+
+print(f"Loading sample game from: {validation_pgn_path}")
+
+# 2. Open the validation.pgn file in read mode
+try:
+    with open(validation_pgn_path, 'r', encoding='utf-8') as pgn_file:
+        # 3. Read the first game from the opened PGN file
+        game = chess.pgn.read_game(pgn_file)
+
+        if game:
+            # 4. Create a chess.Board() object from the game's initial position
+            board = game.board()
+
+            # 5. Extract the game result from the game's headers
+            result = game.headers.get("Result", "N/A")
+
+            # 6. Print the initial board state and the extracted game result
+            print("\n--- Sample Game Details ---")
+            print("Initial Board State (FEN):")
+            print(board.fen())
+            print("\nInitial Board State (Pretty Print):")
+            print(board)
+            print(f"\nGame Result: {result}")
+            print("---------------------------")
+        else:
+            print("No game found in the validation.pgn file.")
+except FileNotFoundError:
+    print(f"Error: The file {validation_pgn_path} was not found. Please ensure it was generated correctly.")
+except Exception as e:
+    print(f"An error occurred while reading the PGN file: {e}")
