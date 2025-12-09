@@ -25,6 +25,7 @@ Pipeline được chia thành 4 cell tương ứng 4 bước chính:
 │
 └── Cell 4 → Dự đoán thử kết quả ván cờ
 
+
 ⚙️ 2. Phân tích Kỹ thuật từng Cell
 2.1. Cell 1 – Đọc file PGN và lấy thông tin ván cờ
 
@@ -58,13 +59,15 @@ In ra FEN + bàn cờ dạng text
 Vai trò:
 Chuyển chess.Board() thành vector NumPy 64 phần tử, mỗi ô được mã hóa theo loại quân:
 
-Loại quân	Giá trị	Trắng	Đen
-Pawn	1	+1	-1
-Knight	2	+2	-2
-Bishop	3	+3	-3
-Rook	4	+4	-4
-Queen	5	+5	-5
-King	6	+6	-6
+| Loại quân | Giá trị | Trắng | Đen |
+| --------- | ------- | ----- | --- |
+| Pawn      | 1       | +1    | -1  |
+| Knight    | 2       | +2    | -2  |
+| Bishop    | 3       | +3    | -3  |
+| Rook      | 4       | +4    | -4  |
+| Queen     | 5       | +5    | -5  |
+| King      | 6       | +6    | -6  |
+
 
 Output:
 
@@ -78,10 +81,12 @@ Vector numerical_rep có shape (64,)
 
 Mô hình sử dụng kiến trúc Fully Connected (MLP):
 
-Layer	Units	Activation
-Dense 1	128	ReLU
-Dense 2	64	ReLU
-Output	3	Softmax
+| Layer   | Units | Activation |
+| ------- | ----- | ---------- |
+| Dense 1 | 128   | ReLU       |
+| Dense 2 | 64    | ReLU       |
+| Output  | 3     | Softmax    |
+
 
 Output: mô hình dự đoán 3 lớp:
 
