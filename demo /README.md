@@ -15,7 +15,10 @@ Pipeline này không phải mô hình cuối cùng, nhưng là nền tảng kỹ
 
 Pipeline được chia thành 4 cell tương ứng 4 bước chính:
 
-📁 Chess Outcome Demo Pipeline
+## 📁 Chess Outcome Demo Pipeline
+
+```
+Chess Outcome Demo Pipeline
 │
 ├── Cell 1 → Load PGN & đọc ván cờ
 │
@@ -24,6 +27,8 @@ Pipeline được chia thành 4 cell tương ứng 4 bước chính:
 ├── Cell 3 → Xây dựng mô hình TensorFlow (MLP)
 │
 └── Cell 4 → Dự đoán thử kết quả ván cờ
+```
+
 
 
 ⚙️ 2. Phân tích Kỹ thuật từng Cell
