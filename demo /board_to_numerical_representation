@@ -1,0 +1,46 @@
+import numpy as np
+import chess # Already imported in previous cells, but good for clarity in a function definition
+
+def board_to_numerical_representation(board):
+    """
+    Converts a chess.Board object into a numerical 1D NumPy array representation.
+    White pieces are positive, Black pieces are negative, empty squares are 0.
+    Piece values: Pawn=1, Knight=2, Bishop=3, Rook=4, Queen=5, King=6.
+    """
+    # Mapping for piece types to numerical values
+    piece_to_value = {
+        chess.PAWN: 1,
+        chess.KNIGHT: 2,
+        chess.BISHOP: 3,
+        chess.ROOK: 4,
+        chess.QUEEN: 5,
+        chess.KING: 6
+    }
+
+    numerical_board = np.zeros(64, dtype=int)
+
+    for i in range(64):
+        piece = board.piece_at(i) # Corrected line
+        if piece:
+            value = piece_to_value[piece.piece_type]
+            if piece.color == chess.WHITE:
+                numerical_board[i] = value
+            else:
+                numerical_board[i] = -value
+        # If no piece, it remains 0 due to np.zeros initialization
+
+    return numerical_board
+
+# Demonstrate the function with the initial board state from the previous step
+print("\n--- Demonstrating board_to_numerical_representation ---")
+# Assume 'board' object from previous execution is available
+# If not, re-initialize for demonstration
+if 'board' not in locals():
+    initial_board = chess.Board()
+else:
+    initial_board = board
+
+numerical_rep = board_to_numerical_representation(initial_board)
+print("Numerical representation of the initial board:\n", numerical_rep)
+print("Shape of numerical representation:", numerical_rep.shape)
+print("--------------------------------------------------")
