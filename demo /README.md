@@ -20,13 +20,13 @@ Pipeline được chia thành 4 cell tương ứng 4 bước chính:
 ```
 Chess Outcome Demo Pipeline
 │
-├── Cell 1 → Load PGN & đọc ván cờ
+├── validation_pgn_path → Load PGN & đọc ván cờ
 │
-├── Cell 2 → Mã hóa bàn cờ thành vector 64 phần tử
+├── board_to_numerical_representation → Mã hóa bàn cờ thành vector 64 phần tử
 │
-├── Cell 3 → Xây dựng mô hình TensorFlow (MLP)
+├── TensorFlow model → Xây dựng mô hình TensorFlow (MLP)
 │
-└── Cell 4 → Dự đoán thử kết quả ván cờ
+└── prediction → Dự đoán thử kết quả ván cờ
 ```
 
 
