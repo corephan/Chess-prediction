@@ -1,0 +1,17 @@
+import os
+
+project_path = "/content/ChessOutcomesPrediction"
+folders_to_create = [
+    "System",
+    "System/models",
+    "System/dataset",
+    "DataSets/pgnData" # Ensure this base path exists for other operations
+]
+
+print("Ensuring project directories exist...")
+for folder in folders_to_create:
+    full_path = os.path.join(project_path, folder)
+    os.makedirs(full_path, exist_ok=True)
+    print(f"  -> Created/Ensured: {full_path}")
+
+print("Project directories ensured. Please re-run the %%writefile cells now.")
