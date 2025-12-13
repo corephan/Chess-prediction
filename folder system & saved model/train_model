@@ -1,0 +1,46 @@
+%%writefile /content/ChessOutcomesPrediction/System/train_model.py
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+import os
+
+def create_and_save_model(model_save_path):
+    # 1. Define the input shape for the model
+    input_shape = 64
+
+    # 2. Create a Sequential model
+    model = Sequential([
+        Dense(128, activation='relu', input_shape=(input_shape,)),
+        Dense(64, activation='relu'),
+        Dense(3, activation='softmax')
+    ])
+
+    # 3. Print the model summary to verify its architecture
+    print("\n--- Model Summary ---")
+    model.summary()
+    print("---------------------")
+
+    # 4. Save the model
+    try:
+        model.save(model_save_path)
+        print(f"✅ Mô hình đã được lưu thành công tại: {model_save_path}")
+    except Exception as e:
+        print(f"❌ Lỗi khi lưu mô hình: {e}")
+
+    return model
+
+
+if __name__ == "__main__":
+    # Định nghĩa đường dẫn để lưu mô hình
+    project_path = "/content/ChessOutcomesPrediction"
+    models_dir = os.path.join(project_path, "System", "models")
+    os.makedirs(models_dir, exist_ok=True)
+    model_save_path = os.path.join(models_dir, "chess_outcome_model.keras") # Sử dụng định dạng .keras khuyến nghị
+
+    # Tạo và lưu mô hình
+    model = create_and_save_model(model_save_path)
+
+    # Để kiểm tra, bạn có thể tải lại mô hình:
+    # loaded_model = tf.keras.models.load_model(model_save_path)
+    # print("\n--- Mô hình đã tải lại ---")
+    # loaded_model.summary()
