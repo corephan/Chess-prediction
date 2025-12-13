@@ -1,0 +1,81 @@
+%%writefile /content/ChessOutcomesPrediction/System/data_extraction.py
+import chess.pgn
+import os
+import time
+
+def extract_all_draws(source_folder, source_files, output_filename):
+    """
+    Hàm đọc danh sách các file PGN, lọc ván hoà và ghi vào 1 file duy nhất.
+    """
+    output_path = os.path.join(source_folder, output_filename)
+
+    if os.path.exists(output_path):
+        os.remove(output_path)
+        print(f"🗑️ Đã xoá file cũ: {output_filename}")
+
+    total_draws = 0
+    start_time = time.time()
+
+    print(f"🚀 BẮT ĐẦU EXTRACT DRAW TỪ {len(source_files)} FILE...")
+    print("-" * 60)
+
+    with open(output_path, 'w', encoding='utf-8') as pgn_out:
+
+        for filename in source_files:
+            file_path = os.path.join(source_folder, filename)
+
+            if not os.path.exists(file_path):
+                print(f"⚠️ Cảnh báo: Không tìm thấy file {filename}. Bỏ qua.")
+                continue
+
+            print(f"📂 Đang xử lý: {filename} ...")
+
+            with open(file_path, 'r', encoding='utf-8') as pgn_in:
+                file_draws = 0
+                game_count = 0
+
+                while True:
+                    try:
+                        game = chess.pgn.read_game(pgn_in)
+                    except Exception as e:
+                        continue
+
+                    if game is None:
+                        break
+
+                    game_count += 1
+
+                    result = game.headers.get("Result", "*")
+                    if result == "1/2-1/2":
+                        print(game, file=pgn_out, end="\n\n")
+                        file_draws += 1
+                        total_draws += 1
+
+                        if file_draws % 1000 == 0:
+                            print(f"   -> Đã tìm thấy {file_draws} ván hoà trong file này...", end='\r')
+
+            print(f"✅ Xong file {filename}. Tìm thấy: {file_draws} ván hoà.")
+
+    duration = time.time() - start_time
+    print("-" * 60)
+    print(f"🎉 HOÀN TẤT!")
+    print(f"📊 Tổng số ván hoà thu được: {total_draws}")
+    print(f"💾 File lưu tại: {output_path}")
+    print(f"⏱️ Thời gian chạy: {duration:.2f} giây")
+
+# --- CẤU HÌNH & CHẠY ---
+# if __name__ == "__main__":
+#     BASE_DIR = "/content/ChessOutcomesPrediction/DataSets/pgnData"
+#     if not os.path.exists(BASE_DIR):
+#         print(f"❌ Không tìm thấy thư mục: {BASE_DIR}")
+#         exit(1)
+#     OUTPUT_FILE = 'all_draws_combined.pgn'
+#     all_pgn_files_in_dir = [f for f in os.listdir(BASE_DIR) if f.endswith('.pgn')]
+#     source_files_to_process = [f for f in all_pgn_files_in_dir if f != OUTPUT_FILE]
+#     if len(source_files_to_process) == 0:
+#         print(f"❌ Không tìm thấy file .pgn nào để xử lý trong thư mục: {BASE_DIR} (ngoại trừ {OUTPUT_FILE} nếu có).")
+#         exit(1)
+#     SOURCE_FILES = sorted(source_files_to_process)[:3]
+#     print(f"📁 Thư mục: {BASE_DIR}")
+#     print(f"📄 Files được xử lý: {SOURCE_FILES}")
+#     extract_all_draws(BASE_DIR, SOURCE_FILES, OUTPUT_FILE)
