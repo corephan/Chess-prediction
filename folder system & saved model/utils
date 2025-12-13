@@ -1,0 +1,31 @@
+%%writefile /content/ChessOutcomesPrediction/System/utils.py
+import numpy as np
+import chess
+
+def board_to_numerical_representation(board):
+    """
+    Converts a chess.Board object into a numerical 1D NumPy array representation.
+    White pieces are positive, Black pieces are negative, empty squares are 0.
+    Piece values: Pawn=1, Knight=2, Bishop=3, Rook=4, Queen=5, King=6.
+    """
+    piece_to_value = {
+        chess.PAWN: 1,
+        chess.KNIGHT: 2,
+        chess.BISHOP: 3,
+        chess.ROOK: 4,
+        chess.QUEEN: 5,
+        chess.KING: 6
+    }
+
+    numerical_board = np.zeros(64, dtype=int)
+
+    for i in range(64):
+        piece = board.piece_at(i)
+        if piece:
+            value = piece_to_value[piece.piece_type]
+            if piece.color == chess.WHITE:
+                numerical_board[i] = value
+            else:
+                numerical_board[i] = -value
+
+    return numerical_board
