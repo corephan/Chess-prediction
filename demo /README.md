@@ -32,7 +32,8 @@ Chess Outcome Demo Pipeline
 
 
 ⚙️ 2. Phân tích Kỹ thuật từng Cell
-2.1. Cell 1 – Đọc file PGN và lấy thông tin ván cờ
+2.1. 
+Cell validation_pgn_path – Đọc file PGN và lấy thông tin ván cờ
 
 Vai trò:
 
@@ -59,7 +60,8 @@ In ra FEN + bàn cờ dạng text
 Ý nghĩa:
 Đây là bước data ingestion, tương đương việc nạp dữ liệu đầu tiên trong mọi dự án ML.
 
-2.2. Cell 2 – Mã hóa Trạng thái Bàn cờ thành Vector
+2.2. 
+Cell board_to_numerical_representation – Mã hóa Trạng thái Bàn cờ thành Vector
 
 Vai trò:
 Chuyển chess.Board() thành vector NumPy 64 phần tử, mỗi ô được mã hóa theo loại quân:
@@ -82,7 +84,8 @@ Vector numerical_rep có shape (64,)
 Ý nghĩa:
 Đây là bước Feature Engineering – chuyển trạng thái bàn cờ sang dạng mô hình hiểu được.
 
-2.3. Cell 3 – Xây dựng Mô hình TensorFlow
+2.3. 
+Cell TensorFlow model – Xây dựng Mô hình TensorFlow
 
 Mô hình sử dụng kiến trúc Fully Connected (MLP):
 
@@ -103,7 +106,8 @@ Draw
 
 Softmax giúp tạo xác suất cho mỗi outcome.
 
-2.4. Cell 4 – Dự đoán Kết quả Từ Trạng thái Bàn cờ
+2.4. 
+Cell prediction – Dự đoán Kết quả Từ Trạng thái Bàn cờ
 
 Vai trò:
 
